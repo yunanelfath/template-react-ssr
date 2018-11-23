@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import App from '../shared/App';
+import App from '../shared/App.js';
 
 describe('App component', () => {
     it('should render a headline', () => {

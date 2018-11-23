@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import GettingStarted from '../../shared/components/GettingStarted';
+import GettingStarted from '../../shared/components/getting-started/index.js';
 
 describe('GettingStarted component', () => {
 

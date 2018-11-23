@@ -4,6 +4,8 @@
 # NodeJS
 node_modules
 
+package-lock.json
+
 # Project
 public/**.json
 public/assets

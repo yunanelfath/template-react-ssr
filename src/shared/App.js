@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 
 import './app.styl';
 
-import UniversalComponent from './components/UniversalComponent';
+// import UniversalComponent from './components/UniversalComponent';
 
 /**
  * The `App` component is the entry point for the react app.
@@ -21,7 +21,6 @@ export default class App extends Component {
                 </Helmet>
 
                 <h1>Welcome to React Fiber.</h1>
-                <UniversalComponent name="getting-started"/>
             </div>
         );
     }

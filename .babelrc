@@ -1,15 +1,24 @@
 {
+  "plugins": ["transform-es2015-modules-commonjs", "syntax-dynamic-import", "transform-runtime", "universal-import"],
   "presets": [
-    ["env", {
-      "targets": {
-        "node": "current",
-        "browsers": ["last 2 versions"]
-       }
-    }],
-    "stage-2",
-    "react"
+    [
+      "es2015",
+      {
+        "modules": false
+      }
+    ],
+    "react",
+    "env",
+    "stage-0"
   ],
-  "plugins": [
-    "universal-import"
-  ]
+  "env": {
+    "start": {
+      "presets": [
+        "react-hmre"
+      ]
+    },
+    "test": {
+      "presets": ["es2015", "react", "stage-0"]
+    }
+  }
 }
