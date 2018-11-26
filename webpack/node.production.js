@@ -16,6 +16,29 @@ module.exports = merge(common, {
         'babel-polyfill',
         join(__dirname, '../src/index')
     ],
+    module: {
+        rules: [
+        {
+            test: /\.jsx?$/,
+            exclude: /(node_modules|bower_components)/,
+            loader: "babel-loader",
+        },
+        {
+          test: /\.cjsx$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'coffee-jsx-loader',
+              options: {
+                query: {
+                  presets: ['es2015'],
+                },
+              }
+            },
+          ]
+        }
+      ]
+    },
     output: {
         filename: 'index.js',
         path: join(__dirname, '../public'),

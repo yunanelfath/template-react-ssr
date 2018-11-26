@@ -27,6 +27,25 @@ module.exports = merge(common, {
                     localIdentName: '[name]__[local]--[hash:base64:5]'
                 }
             }, 'stylus-loader']
+        },
+        {
+            test: /\.jsx?$/,
+            exclude: /(node_modules|bower_components)/,
+            loader: "babel-loader",
+        },
+        {
+          test: /\.cjsx$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'coffee-jsx-loader',
+              options: {
+                query: {
+                  presets: ['es2015'],
+                },
+              }
+            },
+          ]
         }]
     },
     plugins: [

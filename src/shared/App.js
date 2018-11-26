@@ -3,6 +3,8 @@ import Helmet from 'react-helmet';
 
 import './app.styl';
 
+import TestApp from './test.cjsx';
+
 // import UniversalComponent from './components/UniversalComponent';
 
 /**
@@ -21,6 +23,7 @@ export default class App extends Component {
                 </Helmet>
 
                 <h1>Welcome to React Fiber.</h1>
+                <TestApp/>
             </div>
         );
     }
