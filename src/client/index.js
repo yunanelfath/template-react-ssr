@@ -5,7 +5,7 @@ import App from '../shared/App';
 
 import ReactRedux, { Provider } from "react-redux";
 
-import store from "../shared/stores/payload/index.cjsx";
+import createStore from "../shared/stores/payload/index.cjsx";
 
 /**
  * Renders a react component into the #react-root div container.
@@ -14,6 +14,7 @@ import store from "../shared/stores/payload/index.cjsx";
  *
  * @param Component React component that should be rendered
  */
+const store = createStore( window.REDUX_DATA )
 const render = Component => {
     hydrate(
         <Provider store={store}>
