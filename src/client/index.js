@@ -3,6 +3,10 @@ import { hydrate } from 'react-dom';
 
 import App from '../shared/App';
 
+import ReactRedux, { Provider } from "react-redux";
+
+import store from "../shared/stores/payload/index.cjsx";
+
 /**
  * Renders a react component into the #react-root div container.
  * Since react 16, the `hydrate` method is used instead of `render` when dealing
@@ -12,7 +16,9 @@ import App from '../shared/App';
  */
 const render = Component => {
     hydrate(
-        <Component/>,
+        <Provider store={store}>
+          <Component/>
+        </Provider>,
         document.getElementById('react-root')
     );
 };

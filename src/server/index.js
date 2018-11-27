@@ -6,6 +6,10 @@ import flushChunks from 'webpack-flush-chunks';
 
 import App from '../shared/App';
 
+import ReactRedux, { Provider } from "react-redux";
+
+import store from "../shared/stores/payload/index.cjsx";
+
 /**
  * Provides the server side rendered app. In development environment, this method is called by
  * `react-hot-server-middleware`.
@@ -16,7 +20,9 @@ import App from '../shared/App';
  */
 export default ({ clientStats }) => async (req, res) => {
     const app = (
-        <App/>
+      	<Provider store={store}>
+          <App/>
+      	</Provider>
     );
 
     const appString = ReactDOM.renderToString(app);
