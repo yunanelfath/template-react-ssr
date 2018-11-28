@@ -19,6 +19,18 @@ module.exports = merge(common, {
     },
     module: {
         rules: [{
+            test: /\.s?css$/,
+            exclude: /node_modules/,
+            use: [{
+                loader: 'css-loader',
+                options: {
+                    modules: true,
+                    localIdentName: '[name]__[local]'
+                }
+            }, 'ruby-sass-loader'
+            ]
+          },
+          {
             test: /\.styl/,
             exclude: /node_modules/,
             use: [{

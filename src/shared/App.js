@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 
 import './app.styl';
+import './app.scss';
 
 import TestApp from './test.cjsx';
 
