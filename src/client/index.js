@@ -7,6 +7,10 @@ import ReactRedux, { Provider } from "react-redux";
 
 import createStore from "../shared/stores/payload/index.cjsx";
 
+import { BrowserRouter as Router } from "react-router-dom";
+
+import ScrollToTop from "../shared/components/ScrollToTop";
+
 /**
  * Renders a react component into the #react-root div container.
  * Since react 16, the `hydrate` method is used instead of `render` when dealing
@@ -18,7 +22,11 @@ const store = createStore( window.REDUX_DATA )
 const render = Component => {
     hydrate(
         <Provider store={store}>
-          <Component/>
+          <Router>
+            <ScrollToTop>
+              <Component/>
+            </ScrollToTop>
+          </Router>
         </Provider>,
         document.getElementById('react-root')
     );

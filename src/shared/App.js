@@ -6,6 +6,10 @@ import './app.scss';
 
 import TestApp from './test.cjsx';
 
+import routeItems from './routes/items.js';
+import { AppContainer } from 'react-hot-loader';
+import { Switch, Route } from "react-router-dom";
+
 // import UniversalComponent from './components/UniversalComponent';
 
 /**
@@ -18,14 +22,14 @@ export default class App extends Component {
 
     render() {
         return (
-            <div>
-                <Helmet>
-                    <title>App Component | React Universal</title>
-                </Helmet>
-
-                <h1>Welcome to React Fiber.</h1>
-                <TestApp/>
-            </div>
+            <AppContainer>
+        			<div>
+        				<h1>tetssssingg laskdjf laskdfjlskajd</h1>
+        				<Switch>
+        						{ routeItems.map( route => <Route key={ route.path } { ...route } /> ) }
+        				</Switch>
+        			</div>
+            </AppContainer>
         );
     }
 
