@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 
-import './app.styl';
-import './app.scss';
-
-import TestApp from './test.cjsx';
-
 import routeItems from './routes/items.js';
 import { AppContainer } from 'react-hot-loader';
 import { Switch, Route } from "react-router-dom";
@@ -24,7 +19,10 @@ export default class App extends Component {
         return (
             <AppContainer>
         			<div>
-        				<h1>tetssssingg laskdjf laskdfjlskajd</h1>
+        				<h1>Currency App Container</h1>
+                <div>
+                  <a href="/">home</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/currency">Currency App</a>
+                </div>
         				<Switch>
         						{ routeItems.map( route => <Route key={ route.path } { ...route } /> ) }
         				</Switch>

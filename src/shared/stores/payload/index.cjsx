@@ -4,7 +4,8 @@ redux = require('redux')
 thunkMiddleware = require('redux-thunk').default
 
 pages = require('./../reducers/pages.cjsx')
+currency = require('./../reducers/currency.cjsx')
 
 createStore = ( initialState ) =>
-  redux.createStore(redux.combineReducers({pages}), initialState, redux.applyMiddleware(thunkMiddleware))
+  redux.createStore(redux.combineReducers({pages,currency}), initialState, redux.applyMiddleware(thunkMiddleware))
 module.exports = createStore

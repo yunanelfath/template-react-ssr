@@ -1,5 +1,5 @@
-import Home from "./../test2.cjsx";
-import About from "./../test.cjsx";
+import Home from "./../test";
+import Currency from "./../components/currency/index.cjsx";
 
 export default [
     {
@@ -8,13 +8,8 @@ export default [
         exact: true,
     },
     {
-        path: "/about",
-        component: About,
+        path: "/currency",
+        component: Currency,
         exact: true,
-    },
-		{
-        path: "/about/:id",
-        component: Home,
-        exact: true,
-		}
+    }
 ];
