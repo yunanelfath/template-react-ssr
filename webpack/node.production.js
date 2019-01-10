@@ -1,8 +1,7 @@
 const merge = require('webpack-merge');
+const webpack = require('webpack');
 const common = require('./common');
-const { join } = require('path');
-const CopyPlugin = require('copy-webpack-plugin');
-
+const join = require('path').join;
 const extendedNodeExternals = require('../scripts/extended-node-externals');
 
 module.exports = merge(common, {
@@ -13,17 +12,35 @@ module.exports = merge(common, {
         __dirname: false,
         __filename: false
     },
-    entry: ['@babel/polyfill', join(__dirname, '../src/index')],
+    entry: [
+        'babel-polyfill',
+        join(__dirname, '../src/index')
+    ],
+    module: {
+        rules: [
+        {
+            test: /\.jsx?$/,
+            exclude: /(node_modules|bower_components)/,
+            loader: "babel-loader",
+        },
+        {
+          test: /\.cjsx$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'coffee-jsx-loader',
+              options: {
+                query: {
+                  presets: ['es2015'],
+                },
+              }
+            },
+          ]
+        }
+      ]
+    },
     output: {
         filename: 'index.js',
-        path: join(__dirname, '../public')
-    },
-    plugins: [
-        new CopyPlugin([
-            {
-                from: join(__dirname, '../package.json'),
-                to: join(__dirname, '../public/package.json')
-            }
-        ])
-    ]
+        path: join(__dirname, '../public'),
+    }
 });

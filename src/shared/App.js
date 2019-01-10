@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 
-import './app.styl';
+import routeItems from './routes/items.js';
+import { AppContainer } from 'react-hot-loader';
+import { Switch, Route } from "react-router-dom";
 
-import UniversalComponent from './components/UniversalComponent';
+// import UniversalComponent from './components/UniversalComponent';
 
 /**
  * The `App` component is the entry point for the react app.
@@ -12,16 +14,21 @@ import UniversalComponent from './components/UniversalComponent';
  * You can start developing your react app here.
  */
 export default class App extends Component {
+
     render() {
         return (
-            <div>
-                <Helmet>
-                    <title>App Component | React Universal</title>
-                </Helmet>
-
-                <h1>Welcome to React Fiber.</h1>
-                <UniversalComponent name="getting-started" />
-            </div>
+            <AppContainer>
+        			<div>
+        				<h1>Currency App Container</h1>
+                <div>
+                  <a href="/">home</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/currency">Currency App</a>
+                </div>
+        				<Switch>
+        						{ routeItems.map( route => <Route key={ route.path } { ...route } /> ) }
+        				</Switch>
+        			</div>
+            </AppContainer>
         );
     }
+
 }

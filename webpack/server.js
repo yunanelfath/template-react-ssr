@@ -9,30 +9,59 @@ module.exports = merge(common, {
     name: 'server',
     target: 'node',
     externals: nodeExternals,
-    entry: ['@babel/polyfill', join(__dirname, '../src/server/index')],
+    entry: [
+        join(__dirname, '../src/server/index')
+    ],
     devtool: 'inline-source-map',
     output: {
         filename: 'app.server.js',
         libraryTarget: 'commonjs2'
     },
     module: {
-        rules: [
+        rules: [{
+            test: /\.s?css$/,
+            exclude: /node_modules/,
+            use: [{
+                loader: 'css-loader',
+                options: {
+                    modules: true,
+                    localIdentName: '[name]__[local]'
+                }
+            }, 'ruby-sass-loader'
+            ]
+          },
+          {
+            test: /\.styl/,
+            exclude: /node_modules/,
+            use: [{
+                loader: 'css-loader/locals',
+                options: {
+                    modules: true,
+                    localIdentName: '[name]__[local]--[hash:base64:5]'
+                }
+            }, {
+                loader: 'stylus-loader'
+            }]
+        },
+        {
+            test: /\.jsx?$/,
+            exclude: /(node_modules|bower_components)/,
+            loader: "babel-loader",
+        },
+        {
+          test: /\.cjsx$/,
+          exclude: /node_modules/,
+          use: [
             {
-                test: /\.styl/,
-                exclude: /node_modules/,
-                use: [
-                    {
-                        loader: 'css-loader/locals',
-                        options: {
-                            modules: true,
-                            localIdentName: '[name]__[local]--[hash:base64:5]'
-                        }
-                    },
-                    'postcss-loader',
-                    'stylus-loader'
-                ]
-            }
-        ]
+              loader: 'coffee-jsx-loader',
+              options: {
+                query: {
+                  presets: ['es2015'],
+                },
+              }
+            },
+          ]
+        }]
     },
     plugins: [
         new webpack.optimize.LimitChunkCountPlugin({

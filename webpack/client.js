@@ -1,7 +1,7 @@
-const webpack = require('webpack');
 const merge = require('webpack-merge');
+const webpack = require('webpack');
 const common = require('./common');
-const { join } = require('path');
+const join = require('path').join;
 const ExtractCssChunksPlugin = require('extract-css-chunks-webpack-plugin');
 
 module.exports = merge(common, {
@@ -18,38 +18,47 @@ module.exports = merge(common, {
         chunkFilename: '[name].chunk.js'
     },
     module: {
-        rules: [
-            {
-                test: /\.styl$/,
-                exclude: /node_modules/,
-                use: [
-                    ExtractCssChunksPlugin.loader,
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: true,
-                            localIdentName: '[name]__[local]--[hash:base64:5]'
-                        }
-                    },
-                    'postcss-loader',
-                    'stylus-loader'
-                ]
-            }
-        ]
-    },
-    optimization: {
-        runtimeChunk: {
-            name: 'bootstrap'
+        rules: [{
+          test: /\.s?css$/,
+          exclude: /node_modules/,
+          use: [ExtractCssChunksPlugin.loader, { // to registering css to main.css
+              loader: 'css-loader',
+              options: {
+                  modules: true,
+                  localIdentName: '[name]__[local]'
+              }
+          }, 'ruby-sass-loader'
+          ]
         },
-        splitChunks: {
-            chunks: 'initial',
-            cacheGroups: {
-                vendors: {
-                    test: /[\\/]node_modules[\\/]/,
-                    name: 'vendor'
+        {
+            test: /\.styl$/,
+            use:  [ExtractCssChunksPlugin.loader, {
+                loader: 'css-loader',
+                options: {
+                    modules: true,
+                    localIdentName: '[name]__[local]--[hash:base64:5]'
                 }
-            }
-        }
+            }, 'stylus-loader']
+        },
+        {
+            test: /\.jsx?$/,
+            exclude: /(node_modules|bower_components)/,
+            loader: "babel-loader",
+        },
+        {
+          test: /\.cjsx$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'coffee-jsx-loader',
+              options: {
+                query: {
+                  presets: ['es2015'],
+                },
+              }
+            },
+          ]
+        }]
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
